@@ -6,8 +6,10 @@ var ground1;
 var introImg;
 var invisGround;
 var bg;
+var bulletCount = 3;
 var bullet;
 var bulletGroup;
+var displayBullet = false;
 var robotGroup;
 var gameOverBG;
 var restartBTN;
@@ -220,12 +222,12 @@ function draw() {
     restartBTN.visible = false;
     death = 0;
     score = 0;
+    bulletCount = 3;
 
 
 } 
 
     //to change Game State
-  
   
   else if(gameState == 1){
     //console.log("State Changed");
@@ -236,30 +238,31 @@ function draw() {
     boy.visible = true;
     ground1.visible = true;
     displayScore = true;
+    displayBullet = true;
     heart1.visible = false;
     heart2.visible = false;
     heart3.visible = true;
     hBtn.visible = false;
     howBtn.visible = false;
-    
+
     if(bg.x <= 300.5){
       bg.x = 1300;
     }
     
     //jump
     if(keyDown("up")&& boy.y > 300 ){
-      boy.setFrame(1);
+      boy.setFrame(6);
       boy.velocityY = -17;
       boy.addAnimation("boyIMG", boyImg);
       jump3.play();
     }
     
     //shoot
-    if(keyWentDown("space")){
-      createBullet();
-      shoot3.play();
+    if(keyWentDown("space")&& bulletCount != 0){
+       createBullet();
+       shoot3.play();
+       bulletCount = bulletCount-1
     }
-    
     //gravity
     boy.velocityY = boy.velocityY+1;
     
@@ -272,6 +275,7 @@ function draw() {
       createFeedback();
       score = score+5;
       Explosion3.play();
+      bulletCount = bulletCount+2
     }
     
     //if boy got shot
@@ -334,6 +338,7 @@ function draw() {
         gameOverBG.visible = false;
         score = 0;
         death = 0;
+        bulletCount = 3;
         hBtn.visible = false;
       }
       if(mousePressedOver(hBtn)){
@@ -341,10 +346,12 @@ function draw() {
         startButton.visible = true;
         introImg.x = 500;
         score = 0;
+        bulletCount = 3;
         howBtn.visible = true;
       }
       
       displayScore = true;
+      displayBullet = false;
       
       robotGroup.destroyEach();
       bulletGroup.destroyEach();
@@ -372,6 +379,11 @@ function draw() {
       textSize(18);
       text("Score = "+score, 900,25);
   }
+  if(displayBullet){
+    fill("#fff");
+    textSize(18);
+    text("Bullet = "+bulletCount, 900,50);
+}
 }
 
 
@@ -384,9 +396,9 @@ function spawnRobots(){
       robot.frameDelay = 1;
       robotBullet();
       var rand = Math.round(random(1,3));
-      robot.lifetime = 250
+      robot.lifetime = 250;
 
-    //to generate random imgs for robot
+    //to generate random images for robot
     switch(rand) {
       case 1: robot.addAnimation("r1IMG", robot1);
               break;
@@ -413,7 +425,7 @@ function createBullet() {
 //to create feedbacks
 function createFeedback(){
   feedback = createSprite(500,100,10,10);
-  feedback.visible
+  feedback.visible;
   feedback.scale = 0.5;
   feedback.lifetime = 15;
   var randF = Math.round(random(1,6));
