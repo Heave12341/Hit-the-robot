@@ -94,9 +94,9 @@ function preload(){
   shoot3 = loadSound("sounds/Shoot.mp3")
   armourLose = loadSound("sounds/ArmourLose.wav")
 
-  armour1IMG = loadAnimation("img/armour-1.png")
-  armour2IMG = loadAnimation("img/Armour-2.png")
-  armour3IMG = loadAnimation("img/Armour-3.png")
+  armour1IMG = loadImage("img/armour-1.png")
+  armour2IMG = loadImage("img/Armour-2.png")
+  armour3IMG = loadImage("img/Armour-3.png")
 }
 
 function setup(){
