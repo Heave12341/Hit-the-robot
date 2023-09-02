@@ -166,17 +166,17 @@ robotGroup = new Group();
 rBulletGroup = new Group();
 
 armour1 = createSprite(75,25,20,10);
-armour1.addAnimation("hImg", armour1IMG)
+armour1.addImage("hImg", armour1IMG)
 armour1.scale = 2.5;
 armour1.visible = false;
 
 armour2 = createSprite(75,25,20,10);
-armour2.addAnimation("hImg", armour2IMG)
+armour2.addImage("hImg", armour2IMG)
 armour2.scale = 2.5;
 armour2.visible = false;
 
 armour3 = createSprite(75,25,20,10);
-armour3.addAnimation("hImg", armour3IMG)
+armour3.addImage("hImg", armour3IMG)
 armour3.scale = 2.5;
 armour3.visible = false;
 
